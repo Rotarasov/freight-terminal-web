@@ -1,5 +1,10 @@
 import React from 'react';
-import { Button, FormControl, Input, InputLabel, makeStyles, MenuItem, TextField, Typography } from '@material-ui/core';
+import { Button, makeStyles, MenuItem, TextField, Typography } from '@material-ui/core';
+import { useCompany } from './hooks/useCompany';
+import axios, { AxiosRequestConfig } from 'axios';
+import { fillUrl, getAuthHeaders } from '../utils';
+import { CompanyDetailUrl } from '../constants';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -16,48 +21,67 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export type Company = {
+    account: number
     name: string,
     type: string
 }
+
+export type PassToServerCompany = Company
 
 export type TypeChoice = {
     value: string,
     label: string
 }
 
-export type CompanyDetailProps = {
-    loading: boolean,
-    company?: Company,
-    typeChoices?: TypeChoice[]
-    setCompany: (company: Company) => void
+export type PassToServerTypeChoice = TypeChoice
+
+export type CompanyDetailParams = {
+    id: string
 }
 
-export const CompanyDetail = (props: CompanyDetailProps) => {
+export const CompanyDetail = () => {
+    const { id } = useParams<CompanyDetailParams>() || ""
+    const { loading, company, setCompany, typeChoices } = useCompany(id)
+
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const name: string = event.target.name
+        const value: string = event.target.value;
+        setCompany({ ...company, [name]: value } as Company)
+    }
+
+    const onSave = () => {
+        const accessToken = localStorage.getItem('access') || ""
+        const config: AxiosRequestConfig = {
+            headers: getAuthHeaders(accessToken)
+        }
+        axios.patch(fillUrl(CompanyDetailUrl, { pk: id }), company, config)
+            .catch((error) => alert('Fetch error\n' + error))
+    }
+
     const classes = useStyles()
     return (
         <form className={classes.form}>
             <Typography variant='h4'>
                 Company
             </Typography>
-            <TextField id="name" label="Name" value={props.company?.name} />
+            <TextField id="name" name="name" label="Name" value={company?.name} InputLabelProps={{ shrink: true }} onChange={onChange} />
             <TextField
                 id="type"
+                name="type"
                 select
                 label="Type"
-                value={props.company?.type}
+                value={typeChoices && typeChoices.find((typeChoice: TypeChoice) => typeChoice.value === company?.type)?.value}
+                onChange={onChange}
             >
-                {props.typeChoices?.map(option => (
-                    <MenuItem key={option.label} value={option.value}>
+                {typeChoices?.map((option: TypeChoice) => (
+                    <MenuItem key={option.value} value={option.value}>
                         {option.label}
                     </MenuItem>
                 ))}
             </TextField>
             <div>
-                <Button className={classes.button} variant="contained" color="primary">
+                <Button className={classes.button} variant="contained" color="primary" onClick={onSave}>
                     Save
-                </Button>
-                <Button className={classes.button} variant="contained" color="secondary">
-                    Delete
                 </Button>
             </div>
         </form>

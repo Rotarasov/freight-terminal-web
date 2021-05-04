@@ -1,13 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Header } from './components/Header';
 import { Menu } from './components/Menu';
-import { Container, makeStyles, Paper, Toolbar } from '@material-ui/core';
-import { User, UserInfoForm } from './user/InfoForm';
+import { Container, makeStyles, Toolbar } from '@material-ui/core';
+import { UserInfoForm } from './user/InfoForm';
 import { CompanyList } from './admin/CompanyList';
-import { Company, CompanyDetail } from './admin/CompanyDetail';
-import { CreateCompanyForm } from './admin/CreateCompanyForm';
-import { useUser } from './user/hooks/useUser';
-import { useAuth } from './components/hooks/useAuth';
+import { LoginForm } from './user/LoginForm';
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -25,25 +23,38 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function App() {
-  var { loading, auth } = useAuth({ email: "admin@example.com", password: "admin" })
-  var { loading, user, setUser } = useUser(1, auth);
+export type UserProps = {
+  id: number,
+  accessToken: string
+}
 
+function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(Boolean(localStorage.getItem('userId')))
   const classes = useStyles()
   return (
-    <div className={classes.app}>
-      <Header />
-      <Menu isAdmin={true} />
-      <main className={classes.main}>
-        <Toolbar />
-        <Container className={classes.container}>
-          <UserInfoForm loading={loading} user={user} setUser={setUser} />
-          {/* <CompanyList loading={false} setCompanies={(companies?: Company[]) => { }} /> */}
-          {/* <CompanyDetail loading={false} typeChoices={[{ value: 'value1', label: 'label1' }, { value: 'value2', label: 'label2' }, { value: 'value3', label: 'label3' }]} setCompany={(company?: Company) => { }} /> */}
-          {/* <CreateCompanyForm loading={false} typeChoices={[{ value: 'value1', label: 'label1' }, { value: 'value2', label: 'label2' }, { value: 'value3', label: 'label3' }]} /> */}
-        </Container>
-      </main>
-    </div>
+    <Router>
+      <div className={classes.app}>
+        <Header />
+        <Menu isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <main className={classes.main}>
+          <Toolbar />
+          <Container className={classes.container}>
+            <Switch>
+              <Route path="/companies">
+                <CompanyList />
+              </Route>
+              <Route path="/info">
+                <UserInfoForm />
+              </Route>
+              <Route path="/">
+                <LoginForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+              </Route>
+            </Switch>
+            {/* <CreateCompanyForm loading={false} typeChoices={[{ value: 'value1', label: 'label1' }, { value: 'value2', label: 'label2' }, { value: 'value3', label: 'label3' }]} /> */}
+          </Container>
+        </main>
+      </div>
+    </Router >
   );
 }
 

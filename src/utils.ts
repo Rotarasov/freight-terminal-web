@@ -5,7 +5,9 @@ export function snakeToCamel<T extends Record<string, any>>(obj: T): T {
             (group) => group.toUpperCase().replace('_', '')
         )
         obj[camelKey] = obj[snakeKey]
-        delete obj[snakeKey]
+        if (camelKey !== snakeKey) {
+            delete obj[snakeKey]
+        }
     });
     return obj;
 }
@@ -17,7 +19,9 @@ export function camelToSnake<T extends Record<string, any>>(obj: T): T {
             (group) => '_' + group.toLowerCase()
         )
         obj[snakeKey] = obj[camelKey]
-        delete obj[camelKey]
+        if (camelKey !== snakeKey) {
+            delete obj[camelKey]
+        }
     });
     return obj;
 }
@@ -28,4 +32,8 @@ export function fillUrl(url: string, args: Record<string, string>): string {
         finalUrl = finalUrl.replace(new RegExp(`\{${key}\}`), args[key])
     })
     return finalUrl
+}
+
+export function getAuthHeaders(accessToken: string): { Authorization: string } {
+    return { Authorization: "Bearer " + accessToken }
 }

@@ -1,24 +1,34 @@
-import { useAxios } from '../../components/hooks/useAxios';
-import { fillUrl } from '../../utils';
+import { fillUrl, snakeToCamel } from '../../utils';
 import { UserDetailUrl } from '../../constants';
-import { useState } from 'react';
-import { UserInfoProps, User } from '../InfoForm';
-import { FetchAuthResult } from '../../components/hooks/useAuth';
-import { AxiosRequestConfig } from 'axios';
+import { useEffect, useState } from 'react';
+import { User } from '../InfoForm';
+import axios, { AxiosRequestConfig } from 'axios';
 
 export type FetchUserResult = {
-    user: User
+    loading: boolean,
+    user?: User,
+    setUser: (user: User) => void
 }
 
-export const useUser = (id: number, auth?: FetchAuthResult): UserInfoProps => {
-    const config: AxiosRequestConfig = {
-        url: fillUrl(UserDetailUrl, { pk: id.toString() }),
-        headers: {
-            Authentication: 'Bearer ' + auth?.accessToken
+export const useUser = (id: number, accessToken: string): FetchUserResult => {
+    const [loading, setLoading] = useState<boolean>(false)
+    const [user, setUser] = useState<User | undefined>(undefined)
+
+    useEffect(() => {
+        setLoading(true)
+        const config: AxiosRequestConfig = {
+            headers: {
+                Authorization: "Bearer " + accessToken
+            }
         }
-    }
-    var { loading, data } = useAxios<FetchUserResult>(config)
-    const [user, setUser] = useState<User | undefined>(data?.user)
+        axios.get(fillUrl(UserDetailUrl, { pk: id.toString() }), config)
+            .then(response => {
+                setUser(snakeToCamel<User>(response.data))
+            })
+            .finally(() => setLoading(false))
+            .catch((error) => alert('Fetch error\n' + error))
+    }, [])
+
     return {
         loading,
         user,
