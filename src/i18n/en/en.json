@@ -1,0 +1,33 @@
+{
+    "menu": {
+        "myInfo": "My info",
+        "companies": "Companies",
+        "backup": "Backup",
+        "backupAlert": "Backup has been created.",
+        "restore": "Restore",
+        "restoreAlert": "Backup has been restored.",
+        "updateSSL": "Update SSL",
+        "sslAlert": "SSl certificate has been updated. Expire date: ",
+        "companyInfo": "Company Info",
+        "robots": "Robots",
+        "services": "Services",
+        "freights": "Freights",
+        "devices": "Devices",
+        "logout": "Logout",
+        "english": "English",
+        "ukrainian": "Ukrainian"
+    },
+    "signIn": {
+        "title": "Sign in to your account",
+        "email": "Email address",
+        "password": "Password",
+        "login": "Login"
+    },
+    "user": {
+        "title": "My account",
+        "email": "Email address",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "save": "Save"
+    }
+}

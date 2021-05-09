@@ -5,6 +5,7 @@ import { UserDetailUrl } from '../constants';
 import axios, { AxiosRequestConfig } from 'axios';
 import { fillUrl } from '../utils';
 import { camelToSnake } from '../utils';
+import { DefaultNamespace, TFunction } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -36,8 +37,11 @@ export type PassToServerUser = {
     is_superuser: string
 }
 
+export type UserInfoFormProps = {
+    t: TFunction<DefaultNamespace>
+}
 
-export const UserInfoForm = () => {
+export const UserInfoForm = (props: UserInfoFormProps) => {
     const userId = Number.parseInt(localStorage.getItem('userId') || "0")
     const accessToken = localStorage.getItem('access') || ""
 
@@ -65,14 +69,14 @@ export const UserInfoForm = () => {
     return (
         <form className={classes.form}>
             <Typography variant='h4'>
-                My account
+                {props.t("user.title")}
             </Typography>
-            <TextField id="email" name="email" label="Email address" value={user?.email} onChange={onChange} InputLabelProps={{ shrink: true }} />
-            <TextField id="firstName" name="firstName" label="First Name" value={user?.firstName} onChange={onChange} InputLabelProps={{ shrink: true }} />
-            <TextField id="lastName" name="lastName" label="Last Name" value={user?.lastName} onChange={onChange} InputLabelProps={{ shrink: true }} />
+            <TextField id="email" name="email" label={props.t("user.email")} value={user?.email} onChange={onChange} InputLabelProps={{ shrink: true }} />
+            <TextField id="firstName" name="firstName" label={props.t("user.firstName")} value={user?.firstName} onChange={onChange} InputLabelProps={{ shrink: true }} />
+            <TextField id="lastName" name="lastName" label={props.t("user.lastName")} value={user?.lastName} onChange={onChange} InputLabelProps={{ shrink: true }} />
             <div>
                 <Button className={classes.button} variant="contained" color="primary" onClick={onClick}>
-                    Save
+                    {props.t("user.save")}
                 </Button>
             </div>
         </form>

@@ -1,5 +1,6 @@
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import axios from 'axios';
+import { DefaultNamespace, TFunction } from "react-i18next";
 import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { TokenUrl } from '../constants';
@@ -33,6 +34,7 @@ export type FetchAuthResult = {
 type LoginProps = {
     isLoggedIn: boolean
     setIsLoggedIn: (isLoggedIn: boolean) => void
+    t: TFunction<DefaultNamespace>
 }
 
 export const LoginForm = (props: LoginProps) => {
@@ -51,11 +53,12 @@ export const LoginForm = (props: LoginProps) => {
         axios.post(TokenUrl, credentials)
             .then(response => snakeToCamel<FetchAuthResult>(response.data))
             .then(data => {
+                console.log(data)
                 localStorage.setItem('access', data.access)
                 localStorage.setItem('userId', data.userId.toString())
                 localStorage.setItem('isAdmin', data.isSuperuser.toString())
             })
-            .finally(() => props.setIsLoggedIn(true))
+            .then(() => props.setIsLoggedIn(true))
     }
 
     const classes = useStyles()
@@ -63,13 +66,13 @@ export const LoginForm = (props: LoginProps) => {
         <form className={classes.form}>
             {props.isLoggedIn && <Redirect to="info/" />}
             <Typography variant='h4'>
-                Sign in to your account
+                {props.t("signIn.title")}
             </Typography>
-            <TextField id="email" name="email" label="Email address" type="email" onChange={onChange} />
-            <TextField id="password" name="password" label="Password" type="password" onChange={onChange} />
+            <TextField id="email" name="email" label={props.t("signIn.email")} type="email" onChange={onChange} />
+            <TextField id="password" name="password" label={props.t("signIn.password")} type="password" onChange={onChange} />
             <div>
                 <Button className={classes.button} variant="contained" color="primary" onClick={onClick}>
-                    Login
+                    {props.t("signIn.login")}
                 </Button>
             </div>
         </form>

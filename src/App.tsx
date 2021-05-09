@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Header } from './components/Header';
 import { Menu } from './components/Menu';
-import { Container, makeStyles, Toolbar } from '@material-ui/core';
+import { Container, createMuiTheme, makeStyles, ThemeProvider, Toolbar } from '@material-ui/core';
 import { UserInfoForm } from './user/InfoForm';
 import { CompanyList } from './admin/CompanyList';
 import { LoginForm } from './user/LoginForm';
+import { useTranslation } from 'react-i18next';
+import './i18n/i18n';
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -29,13 +31,15 @@ export type UserProps = {
 }
 
 function App() {
+  const { t, i18n } = useTranslation();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(Boolean(localStorage.getItem('userId')))
+
   const classes = useStyles()
   return (
     <Router>
       <div className={classes.app}>
         <Header />
-        <Menu isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Menu isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} t={t} i18n={i18n} />
         <main className={classes.main}>
           <Toolbar />
           <Container className={classes.container}>
@@ -44,13 +48,12 @@ function App() {
                 <CompanyList />
               </Route>
               <Route path="/info">
-                <UserInfoForm />
+                <UserInfoForm t={t} />
               </Route>
               <Route path="/">
-                <LoginForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+                <LoginForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} t={t} />
               </Route>
             </Switch>
-            {/* <CreateCompanyForm loading={false} typeChoices={[{ value: 'value1', label: 'label1' }, { value: 'value2', label: 'label2' }, { value: 'value3', label: 'label3' }]} /> */}
           </Container>
         </main>
       </div>

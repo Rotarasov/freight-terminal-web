@@ -70,11 +70,12 @@ export const CompanyDetail = () => {
                 name="type"
                 select
                 label="Type"
-                value={typeChoices && typeChoices.find((typeChoice: TypeChoice) => typeChoice.value === company?.type)?.value}
+                value={company?.type || ""}
                 onChange={onChange}
+                InputLabelProps={{ shrink: true }}
             >
                 {typeChoices?.map((option: TypeChoice) => (
-                    <MenuItem key={option.value} value={option.value}>
+                    <MenuItem selected={option.value === company?.type} key={option.value} value={option.value}>
                         {option.label}
                     </MenuItem>
                 ))}

@@ -1,4 +1,4 @@
-export const ServerUrl: string = 'http://localhost:8000/'
+export const ServerUrl: string = 'https://freight-terminal-api.herokuapp.com/'
 
 export const UserListUrl: string = ServerUrl + 'users/'
 export const UserDetailUrl: string = ServerUrl + 'users/{pk}/'
