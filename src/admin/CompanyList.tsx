@@ -47,8 +47,7 @@ export const CompanyList = (props: CompanyListProps) => {
         }
         axios.delete(fillUrl(CompanyDetailUrl, { pk: account }), config)
             .catch((error) => alert('Fetch error\n' + error))
-
-        window.location.reload()
+            .finally(() => window.location.reload())
     }
 
     return (

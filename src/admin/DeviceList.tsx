@@ -47,8 +47,7 @@ export const DeviceList = (props: DeviceListProps) => {
         }
         axios.delete(fillUrl(DeviceDetailUrl, { pk: id }), config)
             .catch((error) => alert('Fetch error\n' + error))
-
-        window.location.reload()
+            .finally(() => window.location.reload())
     }
 
     return (

@@ -76,7 +76,7 @@ export const CreateDeviceForm = (props: CreateDeviceFormProps) => {
         setDevice({ ...device, [name]: value } as Device)
     }
 
-    const onSave = () => {
+    const onCreate = () => {
         const accessToken = localStorage.getItem('access') || ""
         const config: AxiosRequestConfig = {
             headers: getAuthHeaders(accessToken)
@@ -136,7 +136,7 @@ export const CreateDeviceForm = (props: CreateDeviceFormProps) => {
                 ))}
             </TextField>
             <div>
-                <Button className={classes.button} variant="contained" color="primary" onClick={onSave}>
+                <Button className={classes.button} variant="contained" color="primary" onClick={onCreate}>
                     {props.t("device.create")}
                 </Button>
             </div>
