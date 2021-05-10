@@ -93,6 +93,9 @@ const AdminMenuList = (props: MenuProps) => {
             <ListItem button component={Link} to="/companies" key='Companies'>
                 <ListItemText primary={props.t('menu.companies')} />
             </ListItem>
+            <ListItem button component={Link} to="/devices" key='Devices'>
+                <ListItemText primary={props.t('menu.devices')} />
+            </ListItem>
             <Divider />
             <ListItem button key='Backup' onClick={() => onBackupDB(props.t)}>
                 <ListItemText primary={props.t('menu.backup')} />
@@ -142,9 +145,6 @@ const CompanyMenuList = (props: MenuProps) => {
             </ListItem>
             <ListItem button key='Freights'>
                 <ListItemText primary='Freights' />
-            </ListItem>
-            <ListItem button key='Devices'>
-                <ListItemText primary='Devices' />
             </ListItem>
             <Divider />
             <ListItem button key='Logout' onClick={() => onLogout(props.setIsLoggedIn)}>

@@ -53,7 +53,7 @@ export const CreateCompanyForm = (props: CreateCompanyFormProps) => {
         axios.get(CompanyTypesUrl, config)
             .then((response) => {
                 setTypeChoices(response.data.map(
-                    (typeChoice: PassToServerTypeChoice) => snakeToCamel<TypeChoice>(typeChoice)
+                    (typeChoice: PassToServerTypeChoice) => snakeToCamel<PassToServerTypeChoice, TypeChoice>(typeChoice)
                 ))
             })
             .catch((error) => alert('Fetch error\n' + error))

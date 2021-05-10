@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import { CompanyDetailUrl, CompanyTypesUrl } from "../../constants";
 import { fillUrl, getAuthHeaders, snakeToCamel } from "../../utils";
-import { Company, PassToServerTypeChoice, TypeChoice } from "../CompanyDetail";
+import { Company, PassToServerCompany, PassToServerTypeChoice, TypeChoice } from "../CompanyDetail";
 
 export type FetchCompanyResult = {
     loading: boolean,
@@ -26,12 +26,12 @@ export const useCompany = (id: string): FetchCompanyResult => {
         axios.get(CompanyTypesUrl, config)
             .then((response) => {
                 setTypeChoices(response.data.map(
-                    (typeChoice: PassToServerTypeChoice) => snakeToCamel<TypeChoice>(typeChoice)
+                    (typeChoice: PassToServerTypeChoice) => snakeToCamel<PassToServerTypeChoice, TypeChoice>(typeChoice)
                 ))
             })
             .catch((error) => alert('Fetch error\n' + error))
         axios.get(fillUrl(CompanyDetailUrl, { pk: id }), config)
-            .then(response => setCompany(snakeToCamel<Company>(response.data)))
+            .then(response => setCompany(snakeToCamel<PassToServerCompany, Company>(response.data)))
             .finally(() => setLoading(false))
             .catch((error) => alert('Fetch error\n' + error))
     }, [])

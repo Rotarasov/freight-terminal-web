@@ -1,4 +1,4 @@
-export function snakeToCamel<T extends Record<string, any>>(obj: T): T {
+export function snakeToCamel<T extends Record<string, any>, R extends Record<string, any>>(obj: T): R {
     Object.keys(obj).forEach((snakeKey: string) => {
         let camelKey: keyof T = snakeKey.replace(
             /([-_][a-z])/g,
@@ -9,10 +9,10 @@ export function snakeToCamel<T extends Record<string, any>>(obj: T): T {
             delete obj[snakeKey]
         }
     });
-    return obj;
+    return obj as R;
 }
 
-export function camelToSnake<T extends Record<string, any>>(obj: T): T {
+export function camelToSnake<T extends Record<string, any>, R extends Record<string, any>>(obj: T): R {
     Object.keys(obj).forEach((camelKey: string) => {
         let snakeKey: keyof T = camelKey.replace(
             /([A-Z])/g,
@@ -23,7 +23,7 @@ export function camelToSnake<T extends Record<string, any>>(obj: T): T {
             delete obj[camelKey]
         }
     });
-    return obj;
+    return obj as R;
 }
 
 export function fillUrl(url: string, args: Record<string, string>): string {

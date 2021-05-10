@@ -26,14 +26,14 @@ export const useCompanies = (): FetchCompaniesResult => {
         axios.get(CompanyTypesUrl, config)
             .then((response) => {
                 setTypeChoices(response.data.map(
-                    (typeChoice: PassToServerTypeChoice) => snakeToCamel<TypeChoice>(typeChoice)
+                    (typeChoice: PassToServerTypeChoice) => snakeToCamel<PassToServerTypeChoice, TypeChoice>(typeChoice)
                 ))
             })
             .catch((error) => alert('Fetch error\n' + error))
         axios.get(CompanyListUrl, config)
             .then((response) => {
                 setCompanies(response.data.map(
-                    (company: PassToServerCompany) => snakeToCamel<Company>(company)
+                    (company: PassToServerCompany) => snakeToCamel<PassToServerCompany, Company>(company)
                 ))
             })
             .finally(() => setLoading(false))

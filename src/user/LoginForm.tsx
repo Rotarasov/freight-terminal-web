@@ -31,6 +31,12 @@ export type FetchAuthResult = {
     isSuperuser: boolean
 }
 
+export type AuthFromServer = {
+    access: string,
+    user_id: number
+    is_superuser: boolean
+}
+
 type LoginProps = {
     isLoggedIn: boolean
     setIsLoggedIn: (isLoggedIn: boolean) => void
@@ -51,7 +57,7 @@ export const LoginForm = (props: LoginProps) => {
 
     const onClick = () => {
         axios.post(TokenUrl, credentials)
-            .then(response => snakeToCamel<FetchAuthResult>(response.data))
+            .then(response => snakeToCamel<AuthFromServer, FetchAuthResult>(response.data))
             .then(data => {
                 console.log(data)
                 localStorage.setItem('access', data.access)

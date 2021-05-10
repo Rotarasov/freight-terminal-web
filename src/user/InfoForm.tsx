@@ -63,7 +63,7 @@ export const UserInfoForm = (props: UserInfoFormProps) => {
                 Authorization: "Bearer " + accessToken
             }
         }
-        axios.patch(fillUrl(UserDetailUrl, { pk: user?.id.toString() }), camelToSnake<User>(user), config)
+        axios.patch(fillUrl(UserDetailUrl, { pk: user?.id.toString() }), camelToSnake<User, PassToServerUser>(user), config)
             .catch((error) => alert('Fetch error\n' + error))
     }
     return (

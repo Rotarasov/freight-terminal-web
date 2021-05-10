@@ -1,7 +1,7 @@
 import { fillUrl, snakeToCamel } from '../../utils';
 import { UserDetailUrl } from '../../constants';
 import { useEffect, useState } from 'react';
-import { User } from '../InfoForm';
+import { User, PassToServerUser } from '../InfoForm';
 import axios, { AxiosRequestConfig } from 'axios';
 
 export type FetchUserResult = {
@@ -23,7 +23,7 @@ export const useUser = (id: number, accessToken: string): FetchUserResult => {
         }
         axios.get(fillUrl(UserDetailUrl, { pk: id.toString() }), config)
             .then(response => {
-                setUser(snakeToCamel<User>(response.data))
+                setUser(snakeToCamel<PassToServerUser, User>(response.data))
             })
             .finally(() => setLoading(false))
             .catch((error) => alert('Fetch error\n' + error))

@@ -4,7 +4,7 @@ import React, { useState } from "react"
 import { DefaultNamespace, TFunction } from "react-i18next"
 import { Redirect, Route, useRouteMatch, Switch } from "react-router"
 import { UserListUrl } from "../constants"
-import { User } from "../user/InfoForm"
+import { PassToServerUser, User } from "../user/InfoForm"
 import { camelToSnake } from "../utils"
 import { CreateCompanyForm } from "./CreateCompanyForm"
 
@@ -48,7 +48,7 @@ export const CreateUserForm = (props: CreateUserFormProps) => {
     }
 
     const onCreate = () => {
-        axios.post(UserListUrl, camelToSnake<CreateUser>(user))
+        axios.post(UserListUrl, camelToSnake<CreateUser, PassToServerUser>(user))
             .then((response) => setCreatedUserId(response.data.id))
             .catch((error) => alert('Error\n' + error))
     }
