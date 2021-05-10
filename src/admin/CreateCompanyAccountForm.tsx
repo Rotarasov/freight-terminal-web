@@ -1,6 +1,7 @@
 import { Button, makeStyles, TextField, Typography } from "@material-ui/core"
 import axios from "axios"
 import React, { useState } from "react"
+import { DefaultNamespace, TFunction } from "react-i18next"
 import { Redirect, Route, useRouteMatch, Switch } from "react-router"
 import { UserListUrl } from "../constants"
 import { User } from "../user/InfoForm"
@@ -27,7 +28,11 @@ export type CreateUser = {
     lastName: string,
 }
 
-export const CreateUserForm = () => {
+type CreateUserFormProps = {
+    t: TFunction<DefaultNamespace>
+}
+
+export const CreateUserForm = (props: CreateUserFormProps) => {
     const { url, path } = useRouteMatch()
     const [createdUserId, setCreatedUserId] = useState<number>(0)
     const [user, setUser] = useState<CreateUser>({
@@ -53,21 +58,21 @@ export const CreateUserForm = () => {
     return (
         <Switch>
             <Route path={`${path}/:id/create-company`}>
-                <CreateCompanyForm />
+                <CreateCompanyForm t={props.t} />
             </Route>
             <Route path={path}>
                 <form className={classes.form}>
                     {createdUserId !== 0 && <Redirect to={`${url}/${createdUserId}/create-company`} />}
                     <Typography variant='h4'>
-                        Create account for company manager
+                        {props.t("companyAccount.title")}
                     </Typography>
-                    <TextField name="email" id="email" label="Email address" onChange={onChange} />
-                    <TextField name="firstName" id="firstName" label="First Name" onChange={onChange} />
-                    <TextField name="lastName" id="lastName" label="Last Name" onChange={onChange} />
-                    <TextField name="password" id="password" label="Password" type="password" onChange={onChange} />
+                    <TextField name="email" id="email" label={props.t("companyAccount.email")} onChange={onChange} />
+                    <TextField name="firstName" id="firstName" label={props.t("companyAccount.firstName")} onChange={onChange} />
+                    <TextField name="lastName" id="lastName" label={props.t("companyAccount.lastName")} onChange={onChange} />
+                    <TextField name="password" id="password" label={props.t("companyAccount.password")} type="password" onChange={onChange} />
                     <div>
                         <Button className={classes.button} variant="contained" color="primary" onClick={onCreate}>
-                            Next
+                            {props.t("companyAccount.next")}
                         </Button>
                     </div>
                 </form>

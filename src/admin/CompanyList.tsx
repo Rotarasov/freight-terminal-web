@@ -1,6 +1,7 @@
 import { Button, makeStyles, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@material-ui/core';
 import axios, { AxiosRequestConfig } from 'axios';
 import React from 'react';
+import { DefaultNamespace, TFunction } from 'react-i18next';
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 import { CompanyDetailUrl } from '../constants';
 import { fillUrl, getAuthHeaders } from '../utils';
@@ -25,7 +26,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-export const CompanyList = () => {
+type CompanyListProps = {
+    t: TFunction<DefaultNamespace>
+}
+
+export const CompanyList = (props: CompanyListProps) => {
     const { path, url } = useRouteMatch()
     const { loading, companies, typeChoices } = useCompanies()
     const classes = useStyles()
@@ -49,15 +54,15 @@ export const CompanyList = () => {
     return (
         <Switch>
             <Route path={`${path}/create-account`}>
-                <CreateUserForm />
+                <CreateUserForm t={props.t} />
             </Route>
             <Route path={`${path}/:id`}>
-                <CompanyDetail />
+                <CompanyDetail t={props.t} />
             </Route>
             <Route path={path}>
                 <div className={classes.tableContainer}>
                     <Typography variant='h4'>
-                        All companies
+                        {props.t("companies.title")}
                     </Typography>
                     <Table>
                         <TableHead>
@@ -66,14 +71,14 @@ export const CompanyList = () => {
                                 <TableCell></TableCell>
                                 <TableCell align="right">
                                     <Button component={Link} to={`${url}/create-account`} className={classes.addButton} variant="contained" color="primary">
-                                        Create Company
+                                        {props.t("companies.create")}
                                     </Button>
                                 </TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Company</TableCell>
-                                <TableCell align="right">Type</TableCell>
-                                <TableCell align="right">Action</TableCell>
+                                <TableCell>{props.t("companies.company")}</TableCell>
+                                <TableCell align="right">{props.t("companies.type")}</TableCell>
+                                <TableCell align="right">{props.t("companies.action")}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -83,15 +88,16 @@ export const CompanyList = () => {
                                         {company.name}
                                     </TableCell>
                                     <TableCell align="right">
-                                        {typeChoices.find((typeChoice: TypeChoice) => typeChoice.value === company.type)?.label}
+                                        {props.t("company.companyTypes." +
+                                            typeChoices.find((typeChoice: TypeChoice) => typeChoice.value === company.type)?.label)}
                                     </TableCell>
                                     <TableCell align="right">
                                         <Button component={Link} to={`${url}/${company.account}`} className={classes.button} variant="contained" color="default">
-                                            Detail
-                                    </Button>
+                                            {props.t("companies.detail")}
+                                        </Button>
                                         <Button id={company.account.toString()} className={classes.lastButton} variant="contained" color="secondary" onClick={onDelete}>
-                                            Delete
-                                    </Button>
+                                            {props.t("companies.delete")}
+                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             ))}

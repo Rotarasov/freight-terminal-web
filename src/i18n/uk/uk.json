@@ -29,5 +29,38 @@
         "firstName": "Ім'я",
         "lastName": "Прізвище",
         "save": "Зберігти"
+    },
+    "companies": {
+        "title": "Усі компанії",
+        "create": "Створити компанію",
+        "company": "Компанія",
+        "type": "Тип",
+        "action": "Дія",
+        "detail": "Детально",
+        "delete": "Видалити"
+    },
+    "company": {
+        "title": "Компанія",
+        "titleForCreate": "Створити компанію",
+        "name": "Назва",
+        "type": "Тип",
+        "companyTypes": {
+            "Inbound": "Вхідна",
+            "Outbound": "Вихідна",
+            "Third party": "Третя сторона",
+            "Fourth party": "Четверта сторона",
+            "Distribution": "Розподілення",
+            "Reverse": "Зворотня"
+        },
+        "save": "Зберігти",
+        "create": "Створити"
+    },
+    "companyAccount": {
+        "title": "Створення акаунту для менеджера компанії",
+        "email": "Електронна пошта",
+        "firstName": "Ім'я",
+        "lastName": "Прізвище",
+        "password": "Пароль",
+        "next": "Далі"
     }
 }

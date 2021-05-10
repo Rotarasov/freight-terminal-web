@@ -29,5 +29,38 @@
         "firstName": "First Name",
         "lastName": "Last Name",
         "save": "Save"
+    },
+    "companies": {
+        "title": "All companies",
+        "create": "Create Company",
+        "company": "Company",
+        "type": "Type",
+        "action": "Action",
+        "detail": "Detail",
+        "delete": "Delete"
+    },
+    "company": {
+        "title": "Company",
+        "titleForCreate": "Create company",
+        "name": "Name",
+        "type": "Type",
+        "companyTypes": {
+            "Inbound": "Inbound",
+            "Outbound": "Outbound",
+            "Third party": "Third party",
+            "Fourth party": "Fourth party",
+            "Distribution": "Distribution",
+            "Reverse": "Reverese"
+        },
+        "save": "Save",
+        "create": "Create"
+    },
+    "companyAccount": {
+        "title": "Create account for company manager",
+        "email": "Email address",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "password": "Password",
+        "next": "Next"
     }
 }

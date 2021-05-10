@@ -5,6 +5,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { getAuthHeaders, snakeToCamel } from '../utils';
 import { CompanyListUrl, CompanyTypesUrl } from '../constants';
 import { Redirect, useParams } from 'react-router-dom';
+import { DefaultNamespace, TFunction } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -30,7 +31,11 @@ export type CreateCompanyParams = {
     id?: string
 }
 
-export const CreateCompanyForm = () => {
+type CreateCompanyFormProps = {
+    t: TFunction<DefaultNamespace>
+}
+
+export const CreateCompanyForm = (props: CreateCompanyFormProps) => {
     const { id } = useParams<CreateCompanyParams>()
     const [createdCompanyId, setCreatedCompanyId] = useState<number>(0)
     const accessToken = localStorage.getItem('access') || ""
@@ -71,30 +76,29 @@ export const CreateCompanyForm = () => {
     }
 
     const classes = useStyles()
-    console.log(company)
     return (
         <form className={classes.form}>
             {createdCompanyId !== 0 && <Redirect to={`/companies/${createdCompanyId}`} />}
             <Typography variant='h4'>
-                Create company
-                    </Typography>
-            <TextField name="name" id="name" label="Name" onChange={onChange} />
+                {props.t("company.titleForCreate")}
+            </Typography>
+            <TextField name="name" id="name" label={props.t("company.name")} onChange={onChange} />
             <TextField
                 id="type"
                 name="type"
                 select
-                label="Type"
+                label={props.t("company.type")}
                 onChange={onChange}
             >
                 {typeChoices?.map((option: TypeChoice) => (
                     <MenuItem key={option.label} value={option.value}>
-                        {option.label}
+                        {props.t(`company.companyTypes.${option.label}`)}
                     </MenuItem>
                 ))}
             </TextField>
             <div>
                 <Button className={classes.button} variant="contained" color="primary" onClick={onSave}>
-                    Create
+                    {props.t("company.save")}
                 </Button>
             </div>
         </form>

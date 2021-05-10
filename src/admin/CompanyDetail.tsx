@@ -5,6 +5,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { fillUrl, getAuthHeaders } from '../utils';
 import { CompanyDetailUrl } from '../constants';
 import { useParams } from 'react-router-dom';
+import { DefaultNamespace, TFunction } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -39,7 +40,11 @@ export type CompanyDetailParams = {
     id: string
 }
 
-export const CompanyDetail = () => {
+type CompanyDetailProps = {
+    t: TFunction<DefaultNamespace>
+}
+
+export const CompanyDetail = (props: CompanyDetailProps) => {
     const { id } = useParams<CompanyDetailParams>() || ""
     const { loading, company, setCompany, typeChoices } = useCompany(id)
 
@@ -62,27 +67,27 @@ export const CompanyDetail = () => {
     return (
         <form className={classes.form}>
             <Typography variant='h4'>
-                Company
+                {props.t("company.title")}
             </Typography>
-            <TextField id="name" name="name" label="Name" value={company?.name} InputLabelProps={{ shrink: true }} onChange={onChange} />
+            <TextField id="name" name="name" label={props.t("company.name")} value={company?.name} InputLabelProps={{ shrink: true }} onChange={onChange} />
             <TextField
                 id="type"
                 name="type"
                 select
-                label="Type"
+                label={props.t("company.type")}
                 value={company?.type || ""}
                 onChange={onChange}
                 InputLabelProps={{ shrink: true }}
             >
                 {typeChoices?.map((option: TypeChoice) => (
                     <MenuItem selected={option.value === company?.type} key={option.value} value={option.value}>
-                        {option.label}
+                        {props.t(`company.companyTypes.${option.label}`)}
                     </MenuItem>
                 ))}
             </TextField>
             <div>
                 <Button className={classes.button} variant="contained" color="primary" onClick={onSave}>
-                    Save
+                    {props.t("company.save")}
                 </Button>
             </div>
         </form>
