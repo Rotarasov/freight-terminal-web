@@ -8,6 +8,7 @@ import { CompanyList } from './admin/CompanyList';
 import { LoginForm } from './user/LoginForm';
 import { useTranslation } from 'react-i18next';
 import './i18n/i18n';
+import { DeviceList } from './admin/DeviceList';
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -45,7 +46,10 @@ function App() {
           <Container className={classes.container}>
             <Switch>
               <Route path="/companies">
-                <CompanyList />
+                <CompanyList t={t} />
+              </Route>
+              <Route path="/devices">
+                <DeviceList t={t} />
               </Route>
               <Route path="/info">
                 <UserInfoForm t={t} />

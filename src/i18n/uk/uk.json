@@ -2,6 +2,7 @@
     "menu": {
         "myInfo": "Мій профайл",
         "companies": "Компанії",
+        "devices": "Пристрої",
         "backup": "Бекап",
         "backupAlert": "Бекап був успішно створений.",
         "restore": "Відновити БД",
@@ -12,7 +13,6 @@
         "robots": "Роботи",
         "services": "Послуги",
         "freights": "Вантажі",
-        "devices": "Девайси",
         "logout": "Вийти з акаунту",
         "english": "Английська",
         "ukrainian": "Українська"
@@ -62,5 +62,43 @@
         "lastName": "Прізвище",
         "password": "Пароль",
         "next": "Далі"
+    },
+    "devices": {
+        "title": "Усі пристрої",
+        "device": "Пристрій",
+        "create": "Створити пристрій",
+        "action": "Дія",
+        "detail": "Детально",
+        "delete": "Видалити"
+    },
+    "device": {
+        "title": "Пристрій",
+        "titleForCreate": "Створити пристрій",
+        "name": "Назва",
+        "minValue": "Мінімальне значення",
+        "maxValue": "Максимальне значення",
+        "unit": "Одиниця виміру",
+        "deviceUnits": {
+            "Meter": "Метр",
+            "Kilogram": "Кілограм",
+            "Second": "Секунда",
+            "Ampere": "Ампер",
+            "Kelvin": "Кельвін",
+            "Mole": "Мол",
+            "Candela": "Кандела"
+        },
+        "prefix": "Префікс",
+        "devicePrefixes": {
+            "noPrefix": "Нема префіксу",
+            "Giga": "Гіга",
+            "Mega": "Мега",
+            "Kilo": "Кіло",
+            "Centi": "Санти",
+            "Milli": "Мілі",
+            "Micro": "Мікро",
+            "Nano": "Нано"
+        },
+        "save": "Зберігти",
+        "create": "Створити"
     }
 }

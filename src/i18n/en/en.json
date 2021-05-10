@@ -2,6 +2,7 @@
     "menu": {
         "myInfo": "My info",
         "companies": "Companies",
+        "devices": "Devices",
         "backup": "Backup",
         "backupAlert": "Backup has been created.",
         "restore": "Restore",
@@ -12,7 +13,6 @@
         "robots": "Robots",
         "services": "Services",
         "freights": "Freights",
-        "devices": "Devices",
         "logout": "Logout",
         "english": "English",
         "ukrainian": "Ukrainian"
@@ -62,5 +62,43 @@
         "lastName": "Last Name",
         "password": "Password",
         "next": "Next"
+    },
+    "devices": {
+        "title": "All devices",
+        "device": "Device",
+        "create": "Create Device",
+        "action": "Action",
+        "detail": "Detail",
+        "delete": "Delete"
+    },
+    "device": {
+        "title": "Device",
+        "titleForCreate": "Create device",
+        "name": "Name",
+        "minValue": "Minimal value",
+        "maxValue": "Maximal value",
+        "unit": "Unit",
+        "deviceUnits": {
+            "Meter": "Meter",
+            "Kilogram": "Kilogram",
+            "Second": "Second",
+            "Ampere": "Ampere",
+            "Kelvin": "Kelvin",
+            "Mole": "Mole",
+            "Candela": "Candela"
+        },
+        "prefix": "Prefix",
+        "devicePrefixes": {
+            "noPrefix": "No prefix",
+            "Giga": "Giga",
+            "Mega": "Mega",
+            "Kilo": "Kilo",
+            "Centi": "Centi",
+            "Milli": "Milli",
+            "Micro": "Micro",
+            "Nano": "Nano"
+        },
+        "save": "Save",
+        "create": "Create"
     }
 }
