@@ -12,7 +12,6 @@
         "companyInfo": "Company Info",
         "robots": "Robots",
         "services": "Services",
-        "freights": "Freights",
         "logout": "Logout",
         "english": "English",
         "ukrainian": "Ukrainian"
@@ -99,6 +98,34 @@
             "Nano": "Nano"
         },
         "save": "Save",
+        "create": "Create"
+    },
+    "robots": {
+        "title": "Robots",
+        "model": "Model",
+        "type": "Type",
+        "status": "Status",
+        "create": "Create robot",
+        "action": "Action",
+        "detail": "Detail",
+        "delete": "Delete"
+    },
+    "robot": {
+        "title": "Robot",
+        "titleForCreate": "Create robot",
+        "model": "Model",
+        "type": "Type",
+        "status": "Status",
+        "robotTypes": {
+            "Sea": "Sea",
+            "Air": "Air",
+            "Land": "Land"
+        },
+        "robotStatuses": {
+            "Busy": "Busy",
+            "Free": "Free",
+            "Unavailable": "Unavailable"
+        },
         "create": "Create"
     }
 }

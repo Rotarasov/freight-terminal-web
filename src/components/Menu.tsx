@@ -128,27 +128,41 @@ const AdminMenuList = (props: MenuProps) => {
 }
 
 const CompanyMenuList = (props: MenuProps) => {
+    const account = localStorage.getItem('userId')
     return (
         <List>
-            <ListItem button key='My Info'>
-                <ListItemText primary='My Info' />
+            <ListItem button component={Link} to="/info" key='My Info'>
+                <ListItemText primary={props.t('menu.myInfo')} />
             </ListItem>
-            <ListItem button key='Company Info'>
-                <ListItemText primary='Company Info' />
-            </ListItem>
-            <Divider />
-            <ListItem button key='Robots'>
-                <ListItemText primary='Robots' />
-            </ListItem>
-            <ListItem button key='Services'>
-                <ListItemText primary='Services' />
-            </ListItem>
-            <ListItem button key='Freights'>
-                <ListItemText primary='Freights' />
+            <ListItem button component={Link} to={`/companies/${account}`} key='Company Info'>
+                <ListItemText primary={props.t('menu.companyInfo')} />
             </ListItem>
             <Divider />
+            <ListItem button component={Link} to="/robots" key='Robots'>
+                <ListItemText primary={props.t('menu.robots')} />
+            </ListItem>
+            <ListItem button component={Link} to="/services" key='Services'>
+                <ListItemText primary={props.t('menu.services')} />
+            </ListItem>
+            {/* <ListItem button key='Freights'>
+                <ListItemText primary={props.t('menu.freights')} />
+            </ListItem> */}
+            <Divider />
+            <ListItem button key='Language'>
+                <Select
+                    style={{ width: 300 }}
+                    value={props.i18n.language}
+                    onChange={(event: React.ChangeEvent<{ value: unknown }>) => {
+                        props.i18n.changeLanguage(event.target.value as string)
+                    }}
+                >
+                    {Object.keys(languages).map((key: string) => (
+                        <MenuItem value={key}>{props.t("menu." + languages[key].toLowerCase())}</MenuItem>
+                    ))}
+                </Select>
+            </ListItem>
             <ListItem button key='Logout' onClick={() => onLogout(props.setIsLoggedIn)}>
-                <ListItemText primary='Logout' />
+                <ListItemText primary={props.t('menu.logout')} />
             </ListItem>
         </List>
     )

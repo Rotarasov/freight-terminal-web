@@ -10,6 +10,11 @@ export const CompanyListUrl: string = ServerUrl + 'companies/'
 export const CompanyTypesUrl: string = ServerUrl + 'companies/types/'
 export const CompanyDetailUrl: string = ServerUrl + 'companies/{pk}/'
 
+export const RobotListUrl: string = ServerUrl + 'companies/{pk}/robots/';
+export const RobotStatusesUrl: string = ServerUrl + 'companies/robots/statuses/'
+export const RobotTypesUrl: string = ServerUrl + 'companies/robots/types/'
+export const RobotDetailUrl: string = ServerUrl + 'companies/{companyPk}/robots/{robotPk}/';
+
 export const DeviceListUrl: string = ServerUrl + 'devices/'
 export const DeviceUnitsUrl: string = ServerUrl + 'devices/units/'
 export const DevicePrefixesUrl: string = ServerUrl + 'devices/prefixes/'

@@ -12,7 +12,6 @@
         "companyInfo": "Профайл компанії",
         "robots": "Роботи",
         "services": "Послуги",
-        "freights": "Вантажі",
         "logout": "Вийти з акаунту",
         "english": "Английська",
         "ukrainian": "Українська"
@@ -99,6 +98,34 @@
             "Nano": "Нано"
         },
         "save": "Зберігти",
+        "create": "Створити"
+    },
+    "robots": {
+        "title": "Роботи",
+        "model": "Модель",
+        "type": "Тип",
+        "status": "Статус",
+        "create": "Створити робота",
+        "action": "Дія",
+        "detail": "Детально",
+        "delete": "Видалити"
+    },
+    "robot": {
+        "title": "Робот",
+        "titleForCreate": "Створити робота",
+        "model": "Модель",
+        "type": "Тип",
+        "status": "Статус",
+        "robotTypes": {
+            "Sea": "Судноплавний",
+            "Air": "Повітряний",
+            "Land": "Суходільний"
+        },
+        "robotStatuses": {
+            "Busy": "Зайнятий",
+            "Free": "Вільний",
+            "Unavailable": "Недосяжний"
+        },
         "create": "Створити"
     }
 }

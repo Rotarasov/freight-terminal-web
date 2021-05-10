@@ -9,6 +9,7 @@ import { LoginForm } from './user/LoginForm';
 import { useTranslation } from 'react-i18next';
 import './i18n/i18n';
 import { DeviceList } from './admin/DeviceList';
+import { RobotList } from './company/RobotList';
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -50,6 +51,9 @@ function App() {
               </Route>
               <Route path="/devices">
                 <DeviceList t={t} />
+              </Route>
+              <Route path="/robots">
+                <RobotList t={t} />
               </Route>
               <Route path="/info">
                 <UserInfoForm t={t} />
